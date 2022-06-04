@@ -17,10 +17,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pudge</groupId>
-    <artifactId>wz</artifactId>
+    <artifactId>csjava</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>wz</name>
+    <name>csjava</name>
     <description>study_shop</description>
     <properties>
         <java.version>1.8</java.version>
