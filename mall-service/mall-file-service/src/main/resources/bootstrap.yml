@@ -1,0 +1,29 @@
+server:
+  port: 8082
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+  application:
+    name: mall-file
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 192.168.0.106:8848
+      discovery:
+        #Nacos的注册地址
+        server-addr: 192.168.0.106:8848
+
+ceph:
+  username: cephwz:subwz  #Ceph配置 主用户名：子用户名
+  password: wangzhen #秘钥
+  authUrl: http://192.168.0.131:7480/auth/1.0 #接口访问路径
+  defaultContainerName: user #默认容器名字
+#图片路径
+cephurl: http://localhost:8082/file/download/
+
+#日志配置
+logging:
+  pattern:
+    console: "%msg%n"

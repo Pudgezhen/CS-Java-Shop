@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/brand")
+@CrossOrigin
 public class BrandController {
 
     @Autowired
@@ -60,4 +61,13 @@ public class BrandController {
         Page<Brand> pageInfos = brandService.queryPage(brand,page,size);
         return RespResult.ok(pageInfos);
     }
+
+    /**
+     * 根据分类id查询品牌集合
+     */
+    @GetMapping("/category/{pid}")
+    public RespResult<List<Brand>> categoryBrands(@PathVariable("pid") Integer pid ){
+        return RespResult.ok(brandService.queryByCategoryId(pid));
+    }
+
 }

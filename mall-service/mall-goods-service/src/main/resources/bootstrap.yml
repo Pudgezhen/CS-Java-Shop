@@ -1,12 +1,15 @@
 server:
   port: 8081
 spring:
+  http:
+    encoding:
+      charset: UTF-8
   application:
     name: mall-goods
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.0.106:3306/shop_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: wangzhen
+    username: root
     password: wangzhen
   cloud:
     nacos:
