@@ -3,9 +3,11 @@ package com.wz.service.goods.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wz.api.goods.model.SkuAttribute;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SkuAttributeMapper extends BaseMapper<SkuAttribute> {
 
     /**
