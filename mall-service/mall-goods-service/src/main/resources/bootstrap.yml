@@ -11,6 +11,10 @@ spring:
     url: jdbc:mysql://192.168.0.106:3306/shop_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: wangzhen
+  #Redis配置
+  redis:
+    host: 192.168.0.106
+    port: 6379
   cloud:
     nacos:
       config:
