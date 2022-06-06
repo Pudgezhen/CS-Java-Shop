@@ -1,0 +1,23 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: mall-canal
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 192.168.0.106:8848
+      discovery:
+        #Nacos的注册地址
+        server-addr: 192.168.0.106:8848
+#Canal配置
+canal:
+  server: 192.168.0.106:11111
+  destination: example
+#日志配置
+logging:
+  pattern:
+    console: "%msg%n"
+  level:
+    root: error
