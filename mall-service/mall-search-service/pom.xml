@@ -9,36 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-canal-service</artifactId>
+    <artifactId>mall-search-service</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-    <description>
-        Canal微服务
-    </description>
-
     <dependencies>
-        <!--springboot-canal快速构建依赖包-->
-        <dependency>
-            <groupId>top.javatool</groupId>
-            <artifactId>canal-spring-boot-starter</artifactId>
-            <version>1.2.1-RELEASE</version>
-        </dependency>
-
-        <!--依赖mall-goods-api-->
-        <dependency>
-            <groupId>com.pudge</groupId>
-            <artifactId>mall-goods-api</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>com.pudge</groupId>
             <artifactId>mall-search-api</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
-
 </project>
