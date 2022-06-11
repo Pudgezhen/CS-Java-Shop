@@ -3,10 +3,9 @@ package com.wz.api.search.feign;
 import com.wz.api.search.model.SkuES;
 import com.wz.mall.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @FeignClient("mall-search")
 @RequestMapping("/search")
@@ -20,4 +19,12 @@ public interface SkuSearchFeign {
      */
     @PostMapping("/del/{id}")
     RespResult del(@PathVariable("id") String id);
+
+    /**
+     * 关键词搜索
+     * @param searchMap
+     * @return
+     */
+    @GetMapping
+    RespResult<Map<String,Object>> search(@RequestParam(required = false) Map<String,Object> searchMap );
 }

@@ -5,6 +5,7 @@ import com.pudge.mall.search.mapper.SkuSearchMapper;
 import com.pudge.mall.search.service.SkuSearchService;
 import com.pudge.mall.search.util.HighlightResultMapper;
 import com.wz.api.search.model.SkuES;
+import com.wz.mall.util.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -14,13 +15,14 @@ import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.SortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +70,7 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         //1.关键词前（后）面的标签、设置高亮域
         HighlightBuilder.Field field = new HighlightBuilder
                                                     .Field("name")       //根据指定的域进行高亮查询
-                                                    .preTags("<span>")         // 高亮关键词前缀
+                                                    .preTags("<span style=\"color:red\">")         // 高亮关键词前缀
                                                     .postTags("</span>")       // 高亮关键词后缀
                                                     .fragmentSize(100);        // 碎片长度
         queryBuilder.withHighlightFields(field);
@@ -90,6 +92,13 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         attrParse(resultMap);
         List<SkuES> skuESList = page.getContent();
         resultMap.put("list", skuESList);
+
+        //创建分页对象
+        NativeSearchQuery build = queryBuilder.build();
+        Pageable pageable = build.getPageable();
+        int currentPage = pageable.getPageNumber()+1;
+        PageInfo pageInfo = new PageInfo(page.getTotalElements(),currentPage,5);
+        resultMap.put("pageInfo",pageInfo);
         resultMap.put("totalElements", page.getTotalElements());
         return resultMap;
     }
@@ -142,17 +151,15 @@ public class SkuSearchServiceImpl implements SkuSearchService {
             //排序
             Object sfield = searchMap.get("sfield");
             Object sm = searchMap.get("sm");
-            if(!StringUtils.isEmpty((String)sfield) && !StringUtils.isEmpty((String)sm)){
+            if(!StringUtils.isEmpty((String)sfield) && !StringUtils.isEmpty((String)sm)) {
                 queryBuilder.withSort(
                         SortBuilders.fieldSort(sfield.toString())                 // 指定排序域
-                                .order(SortOrder.valueOf(sm.toString())));        // 指定排序规则
-
+                                .order(SortOrder.valueOf(sm.toString()))    // 指定排序规则
+                );
             }
-
-            // 分页查询
-            queryBuilder.withPageable(PageRequest.of(currentPage(searchMap), 5));
-
         }
+        // 分页查询
+        queryBuilder.withPageable(PageRequest.of(currentPage(searchMap), 5));
         return queryBuilder.withQuery(boolQueryBuilder);
     }
 
