@@ -23,6 +23,17 @@ public class CategoryController {
         return RespResult.ok(categoryService.FindByParenetId(id));
     }
 
+    /**
+     * 根据分类id查询分类信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public RespResult<Category> one(@PathVariable("id") Integer id){
+        Category byId = categoryService.getById(id);
+        return RespResult.ok(byId);
+    }
+
 
 
 }

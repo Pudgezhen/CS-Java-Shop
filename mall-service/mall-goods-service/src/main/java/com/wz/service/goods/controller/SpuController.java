@@ -27,4 +27,16 @@ public class SpuController {
         return RespResult.ok();
     }
 
+    /**
+     * 根据id查询product
+     * @param id
+     * @return
+     */
+    @GetMapping("/product/{id}")
+    public RespResult<Product> one(@PathVariable("id") String id){
+        Product product = spuService.findBySpuId(id);
+        return RespResult.ok(product);
+    }
+
+
 }

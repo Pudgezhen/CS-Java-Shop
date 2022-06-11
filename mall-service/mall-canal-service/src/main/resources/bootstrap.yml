@@ -11,6 +11,10 @@ spring:
       discovery:
         #Nacos的注册地址
         server-addr: 192.168.0.106:8848
+
+  main:
+    #允许存在多个Feign调用相同Service的接口
+    allow-bean-definition-overriding: true
 #Canal配置
 canal:
   server: 192.168.0.106:11111

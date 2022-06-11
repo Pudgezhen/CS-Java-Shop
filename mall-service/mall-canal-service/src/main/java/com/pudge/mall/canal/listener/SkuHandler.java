@@ -1,9 +1,11 @@
 package com.pudge.mall.canal.listener;
 
 import com.alibaba.fastjson.JSON;
+import com.pudge.mall.page.feign.PageFeign;
 import com.wz.api.goods.model.Sku;
 import com.wz.api.search.feign.SkuSearchFeign;
 import com.wz.api.search.model.SkuES;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.javatool.canal.client.annotation.CanalTable;
@@ -16,16 +18,21 @@ public class SkuHandler implements EntryHandler<Sku> {
     @Autowired
     private SkuSearchFeign skuSearchFeign;
 
+    @Autowired
+    private PageFeign pageFeign;
     /**
      * 增加数据监听
      * @param sku
      */
+    @SneakyThrows
     @Override
     public void insert(Sku sku) {
         if (sku.getStatus().intValue() == 1){
             SkuES skuES = JSON.parseObject(JSON.toJSONString(sku),SkuES.class);
             skuSearchFeign.save(skuES);
         }
+
+        pageFeign.html(sku.getSpuId());
     }
 
     /**
@@ -33,6 +40,7 @@ public class SkuHandler implements EntryHandler<Sku> {
      * @param before
      * @param after
      */
+    @SneakyThrows
     @Override
     public void update(Sku before, Sku after) {
 
@@ -43,6 +51,7 @@ public class SkuHandler implements EntryHandler<Sku> {
             SkuES skuES = JSON.parseObject(JSON.toJSONString(after),SkuES.class);
             skuSearchFeign.save(skuES);
         }
+        pageFeign.html(after.getSpuId());
     }
 
     /**
