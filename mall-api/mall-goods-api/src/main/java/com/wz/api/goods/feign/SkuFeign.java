@@ -1,5 +1,6 @@
 package com.wz.api.goods.feign;
 
+import com.wz.api.cart.model.Cart;
 import com.wz.api.goods.model.Sku;
 import com.wz.mall.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,7 +22,9 @@ public interface SkuFeign {
     @PutMapping("/aditems/type")
     RespResult updtypeItems(@RequestParam(value = "id") Integer id);
 
+    @GetMapping("/{id}")
+    RespResult<Sku> one(@PathVariable("id") String id);
 
-
-
+    @PostMapping("/dcount")
+    RespResult dcount(@RequestBody List<Cart> carts);
 }

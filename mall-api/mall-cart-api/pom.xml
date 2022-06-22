@@ -8,18 +8,12 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mall-goods-api</artifactId>
+
+    <artifactId>mall-cart-api</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.pudge</groupId>
-            <artifactId>mall-cart-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-    </dependencies>
 </project>

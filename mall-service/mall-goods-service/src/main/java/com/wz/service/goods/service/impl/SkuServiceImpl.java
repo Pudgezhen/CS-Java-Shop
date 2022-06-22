@@ -2,6 +2,7 @@ package com.wz.service.goods.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wz.api.cart.model.Cart;
 import com.wz.api.goods.model.AdItems;
 import com.wz.api.goods.model.Sku;
 import com.wz.service.goods.mapper.AdItemsMapper;
@@ -84,5 +85,15 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
         //2. 根据推广列表查询产品列表信息
         List<String> skuIds = adItems.stream().map(adItem -> adItem.getSkuId()).collect(Collectors.toList());
         return skuMapper.selectBatchIds(skuIds);
+    }
+
+    @Override
+    public void dcount(List<Cart> carts) {
+        for (Cart cart : carts) {
+            int dcount = skuMapper.dcount(cart.getSkuId(),cart.getNum());
+            if (dcount<=0){
+                throw new RuntimeException("库存不足");
+            }
+        }
     }
 }

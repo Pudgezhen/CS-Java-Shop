@@ -1,0 +1,24 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: mall-cart
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 192.168.0.106:8848
+      discovery:
+        #Nacos的注册地址
+        server-addr: 192.168.0.106:8848
+  data:
+    #MongoDB配置
+    #wangzhen - 用户名、wangzhen- 密码、192.168.0.131 - 数据库地址、27017- 端口号、shop - 库名
+    mongodb:
+      uri: mongodb://wangzhen:wangzhen@192.168.0.131:27017/shop
+  main:
+    allow-bean-definition-overriding: true
+#日志配置
+logging:
+  pattern:
+    console: "%msg%n"

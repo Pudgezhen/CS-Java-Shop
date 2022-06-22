@@ -1,0 +1,32 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: mall-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.106:3306/shop_user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: wangzhen
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 192.168.0.106:8848
+      discovery:
+        #Nacos的注册地址
+        server-addr: 192.168.0.106:8848
+  main:
+    allow-bean-definition-overriding: true
+# ====================MybatisPlus====================
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.wz.api.*.model
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#日志配置
+logging:
+  pattern:
+    console: "%msg%n"

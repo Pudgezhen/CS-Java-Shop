@@ -1,6 +1,7 @@
 package com.wz.service.goods.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wz.api.cart.model.Cart;
 import com.wz.api.goods.model.Sku;
 
 import java.util.List;
@@ -26,5 +27,7 @@ public interface SkuService extends IService<Sku> {
      * @return
      */
     List<Sku> updateTypeSkuItems(Integer id);
+
+    void dcount(List<Cart> carts);
 
 }

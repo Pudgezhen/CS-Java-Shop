@@ -2,6 +2,7 @@ package com.wz.service.goods.controller;
 
 
 
+import com.wz.api.cart.model.Cart;
 import com.wz.api.goods.model.Sku;
 import com.wz.mall.util.RespResult;
 import com.wz.service.goods.service.SkuService;
@@ -17,6 +18,11 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
+    @GetMapping("/{id}")
+    public RespResult<Sku> one(@PathVariable("id") String id){
+            Sku sku = skuService.getById(id);
+            return RespResult.ok(sku);
+    }
 
 
     @GetMapping("/aditems/type")
@@ -35,6 +41,12 @@ public class SkuController {
     @PutMapping("/aditems/type")
     public RespResult updtypeItems(@RequestParam(value = "id") Integer id){
         skuService.updateTypeSkuItems(id);
+        return RespResult.ok();
+    }
+
+    @PostMapping("/dcount")
+    public RespResult dcount(@RequestBody List<Cart> carts){
+        skuService.dcount(carts);
         return RespResult.ok();
     }
 }
