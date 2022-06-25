@@ -1,11 +1,11 @@
 server:
-  port: 8089
+  port: 8090
 spring:
   application:
-    name: mall-order
+    name: mall-pay
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.106:3306/shop_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://192.168.0.106:3306/shop_pay?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: wangzhen
   cloud:
@@ -16,9 +16,6 @@ spring:
       discovery:
         #Nacos的注册地址
         server-addr: 192.168.0.106:8848
-    alibaba:
-      seata:
-        tx-service-group: tx_shop
   main:
     allow-bean-definition-overriding: true
 feign:
@@ -28,17 +25,25 @@ feign:
         connectTimeout: 10000
         readTimeout: 600000
 
-#mq-consumer
-rocketmq:
-  name-server: 192.168.0.106:9876
-
 # ====================MybatisPlus====================
 mybatis-plus:
   mapper-locations: mapper/*.xml
-  type-aliases-package: com.wz.api.*.model
+  type-aliases-package: com.pudge.mall.*.model
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#producer
+rocketmq:
+  name-server: 192.168.0.106:9876
+  producer:
+    group: pay-group
+    send-message-timeout: 300000
+    compress-message-body-threshold: 4096
+    max-message-size: 4194304
+    retry-times-when-send-async-failed: 0
+    retry-next-server: true
+    retry-times-when-send-failed: 2
 
 #日志配置
 logging:

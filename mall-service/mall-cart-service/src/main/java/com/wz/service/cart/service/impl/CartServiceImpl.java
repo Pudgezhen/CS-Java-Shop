@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(List<String> ids) {
         mongoTemplate.remove(Query.query(Criteria.where("_id").in(ids)),Cart.class);

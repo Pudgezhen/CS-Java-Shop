@@ -23,6 +23,9 @@ spring:
       discovery:
         #Nacos的注册地址
         server-addr: 192.168.0.106:8848
+    alibaba:
+      seata:
+        tx-service-group: tx_shop
 # ====================MybatisPlus====================
 mybatis-plus:
   mapper-locations: mapper/*.xml

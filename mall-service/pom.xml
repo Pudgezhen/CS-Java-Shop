@@ -19,6 +19,7 @@
         <module>mall-cart-service</module>
         <module>mall-user-service</module>
         <module>mall-order-service</module>
+        <module>mall-pay-service</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

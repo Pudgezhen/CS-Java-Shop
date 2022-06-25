@@ -12,6 +12,7 @@ import com.wz.api.goods.feign.SkuFeign;
 import com.wz.mall.util.RespResult;
 import com.wz.order.model.Order;
 import com.wz.order.model.OrderSku;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Autowired
     private SkuFeign skuFeign;
 
+    @GlobalTransactional
     @Override
     public Boolean add(Order order) {
         //数据完善
@@ -68,6 +70,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setTotalNum(totalNum);
         order.setMoneys(moneys);
         orderMapper.insert(order);
+
 
         //5.删除购物车
         cartFeign.delete(order.getCartIds());
