@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -87,10 +88,12 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
         return skuMapper.selectBatchIds(skuIds);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void dcount(List<Cart> carts) {
         for (Cart cart : carts) {
             int dcount = skuMapper.dcount(cart.getSkuId(),cart.getNum());
+
             if (dcount<=0){
                 throw new RuntimeException("库存不足");
             }
