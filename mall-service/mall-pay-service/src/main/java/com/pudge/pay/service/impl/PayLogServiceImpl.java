@@ -19,6 +19,8 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
      */
     @Override
     public void add(PayLog payLog) {
+        payLogMapper.deleteById(payLog.getId());
+
         payLogMapper.insert(payLog);
     }
 }

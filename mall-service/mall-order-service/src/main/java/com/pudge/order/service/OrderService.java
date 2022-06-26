@@ -7,4 +7,6 @@ public interface OrderService extends IService<Order> {
 
     Boolean add(Order order);
 
+
+    int updateAfterPayStatus(String id);
 }

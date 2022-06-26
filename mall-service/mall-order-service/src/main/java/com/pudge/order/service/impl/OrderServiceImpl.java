@@ -76,4 +76,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         cartFeign.delete(order.getCartIds());
         return true;
     }
+
+    @Override
+    public int updateAfterPayStatus(String id) {
+        return 0;
+    }
 }
