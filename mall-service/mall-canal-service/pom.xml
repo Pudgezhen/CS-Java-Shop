@@ -44,6 +44,19 @@
             <artifactId>mall-page-api</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.pudge</groupId>
+            <artifactId>mall-seckill-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- ElasticJobAutoConfiguration自动配置类作用-->
+        <dependency>
+            <groupId>com.github.kuhn-he</groupId>
+            <artifactId>elastic-job-lite-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
+        </dependency>
     </dependencies>
 
 </project>

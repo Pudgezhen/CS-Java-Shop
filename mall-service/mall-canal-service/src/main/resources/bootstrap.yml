@@ -25,3 +25,13 @@ logging:
     console: "%msg%n"
   level:
     root: error
+
+
+elaticjob:
+  zookeeper:
+    server-lists: 192.168.0.130:2181
+    namespace: synctask
+
+#动态定时任务案例
+dynamiczk: 192.168.0.130:2181
+dynamicnamespace: dynamictask

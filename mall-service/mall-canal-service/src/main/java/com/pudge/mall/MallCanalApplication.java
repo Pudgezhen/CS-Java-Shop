@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@EnableFeignClients(basePackages = {"com.wz.api.goods.feign","com.wz.api.search.feign","com.pudge.mall.page.feign"})
+@EnableFeignClients(basePackages = {"com.wz.api.goods.feign","com.wz.api.search.feign","com.pudge.mall.page.feign","com.wz.api.seckill.feign"})
 @EnableConfigurationProperties(MybatisPlusProperties.class)
 public class MallCanalApplication {
     public static void main(String[] args) {
