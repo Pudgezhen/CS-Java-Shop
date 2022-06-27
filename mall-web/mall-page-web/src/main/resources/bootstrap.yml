@@ -20,6 +20,8 @@ spring:
 #页面生成存储路径
 pagepath: E:/pages/items/
 
+seckillpath: E:/pages/seckillitems/
+
 #日志配置
 logging:
   pattern:
